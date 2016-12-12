@@ -23,13 +23,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ui-KV-pAp">
-                                <rect key="frame" x="63" y="161" width="30" height="19"/>
+                                <rect key="frame" x="63" y="161" width="232" height="19"/>
                                 <color key="backgroundColor" red="0.50859427690000003" green="1" blue="0.45454406629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="U0N-BO-Ki3"/>
                                     <constraint firstAttribute="width" constant="30" id="URj-iq-are"/>
                                 </constraints>
-                                <state key="normal" title="fsdfsfssfsdfsdfasdfasdfasfsdfsdfsdffsdfsdfsd" image="image_select"/>
+                                <state key="normal" image="image_select"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqw-sE-45B">
                                 <rect key="frame" x="16" y="232" width="118" height="21"/>

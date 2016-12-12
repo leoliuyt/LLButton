@@ -87,6 +87,9 @@ class LLButton : UIControl {
         self.backgroundImageView?.frame = backgroundRect(forBounds: bounds)
         self.imageView?.frame = imageRect(forContentRect: rect)
         self.titleLabel?.frame = titleRect(forContentRect: rect)
+//        if bounds.size == CGSize.zero {
+//            self.bounds.size = CGSize(width: 100, height: 100)
+//        }
     }
 
     func setTitle(_ title: String?, for state: UIControlState) {
@@ -203,9 +206,8 @@ class LLButton : UIControl {
         if (self.titleLabel?.text) != nil {
             let imgSize = imageSize()
             let labelSize = titleSize()
-//            let totalWidth = imgSize.width + labelSize.width
-//            let totalHeight = imgSize.height + labelSize.height
             let insetLeftRightValue = imgSize.width >= contentRect.width ? min(imgSize.width, contentRect.width) : imgSize.width
+            let insetTopBottomValue = imgSize.height >= contentRect.height ? min(imgSize.height, contentRect.height) : imgSize.height
             
             var inset: UIEdgeInsets = UIEdgeInsets()
             if let type = buttonLayoutType {
@@ -215,9 +217,9 @@ class LLButton : UIControl {
                 case .rightLeft:
                     inset.right += insetLeftRightValue
                 case .topBottom:
-                    inset.top += imgSize.height
+                    inset.top += insetTopBottomValue
                 case .bottomTop:
-                    inset.bottom += imgSize.height
+                    inset.bottom += insetTopBottomValue
                 }
             } else {
                 //default
@@ -235,7 +237,9 @@ class LLButton : UIControl {
             let labelSize = titleSize()
             var inset: UIEdgeInsets = UIEdgeInsets()
             let totalWidth = imgSize.width + labelSize.width
+            let totalHeight = imgSize.height + labelSize.height
             let insetLeftRightValue = totalWidth >= contentRect.width ? max(contentRect.width - imgSize.width,0.0) : labelSize.width
+            let insetTopBottomValue = totalHeight >= contentRect.height ? max(contentRect.height - imgSize.height,0.0) : labelSize.height
             if let type = buttonLayoutType {
                 switch type {
                 case .normal,.leftRight:
@@ -243,9 +247,9 @@ class LLButton : UIControl {
                 case .rightLeft:
                     inset.left += insetLeftRightValue
                 case .topBottom:
-                    inset.bottom += labelSize.height
+                    inset.bottom += insetTopBottomValue
                 case .bottomTop:
-                    inset.top += labelSize.height
+                    inset.top += insetTopBottomValue
                 }
             } else {
                 inset.right = labelSize.width;
@@ -387,6 +391,7 @@ class LLButton : UIControl {
                 if rect.maxY > contentRect.maxY {
                     rect.size.height -= (rect.maxY - contentRect.maxY)
                 }
+                rect.size.width = min(size.width, contentRect.width)
             }
         } else {
             if rect.maxX > contentRect.maxX {
