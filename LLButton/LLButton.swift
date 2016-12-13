@@ -87,9 +87,6 @@ class LLButton : UIControl {
         self.backgroundImageView?.frame = backgroundRect(forBounds: bounds)
         self.imageView?.frame = imageRect(forContentRect: rect)
         self.titleLabel?.frame = titleRect(forContentRect: rect)
-//        if bounds.size == CGSize.zero {
-//            self.bounds.size = CGSize(width: 100, height: 100)
-//        }
     }
 
     func setTitle(_ title: String?, for state: UIControlState) {
@@ -403,18 +400,4 @@ class LLButton : UIControl {
         
         return rect
     }
-    
-//    override var intrinsicContentSize: CGSize {
-//        return CGSize(width:100,height:100)
-//    }
-    
-//    static inline CGRect UIEdgeInsetsInsetRect(CGRect rect, UIEdgeInsets insets) {
-//    rect.origin.x    += insets.left;
-//    rect.origin.y    += insets.top;
-//    rect.size.width  -= (insets.left + insets.right);
-//    rect.size.height -= (insets.top  + insets.bottom);
-//    return rect;
-//    }
-    
-
 }
