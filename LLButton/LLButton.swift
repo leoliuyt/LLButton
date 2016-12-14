@@ -18,6 +18,7 @@ private enum ButtonContentType : String {
     case shadowColor
     case image
     case backgroundImage
+    case attibuteStr
 }
 
 enum LLButtonLayoutType : Int{
@@ -110,13 +111,21 @@ class LLButton : UIControl {
     }
     
     func setAttributedTitle(_ title: NSAttributedString?, for state: UIControlState) {
-        
+        setContent(title, for: state, type: ButtonContentType.attibuteStr)
     }
     
     func title(for state: UIControlState) -> String? {
         guard let value = defaultContentForState(for: state, type: ButtonContentType.title), let stringValue = value as? String
         else {
             return nil;
+        }
+        return stringValue
+    }
+    
+    func titleAttribute(for state: UIControlState) -> NSAttributedString? {
+        guard let value = defaultContentForState(for: state, type: ButtonContentType.attibuteStr), let stringValue = value as? NSAttributedString
+            else {
+                return nil;
         }
         return stringValue
     }
@@ -304,8 +313,18 @@ class LLButton : UIControl {
                 addSubview(titleLabel!)
             }
         } else {
-            titleLabel?.removeFromSuperview()
-            titleLabel = nil
+            if let attributeStr = titleAttribute(for: state) {
+                if let label = titleLabel {
+                    label.attributedText = attributeStr
+                } else {
+                    titleLabel = UILabel()
+                    titleLabel?.attributedText = attributeStr
+                    addSubview(titleLabel!)
+                }
+            } else {                
+                titleLabel?.removeFromSuperview()
+                titleLabel = nil
+            }
         }
 
         
