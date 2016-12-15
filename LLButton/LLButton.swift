@@ -8,10 +8,6 @@
 
 import UIKit
 
-extension UIButton {
-
-}
-
 private enum ButtonContentType : String {
     case title
     case titleColor
@@ -27,7 +23,6 @@ enum LLButtonLayoutType : Int{
     case topBottom //上图下文
     case bottomTop //下图上文
 }
-
 
 class LLButton : UIControl {
 
@@ -45,7 +40,7 @@ class LLButton : UIControl {
 //    var showsTouchWhenHighlighted: Bool //false
     
     var buttonType: UIButtonType?
-
+    
     var buttonLayoutType: LLButtonLayoutType?
     private var contentDic: [String : [String : Any]] = [:]
     
@@ -55,7 +50,9 @@ class LLButton : UIControl {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+//        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        makeUI()
     }
     
     convenience init(type: LLButtonLayoutType = .normal) {
@@ -65,8 +62,10 @@ class LLButton : UIControl {
     
     private func makeUI() {
         titleLabel = UILabel()
+        titleLabel?.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         imageView = UIImageView()
         backgroundImageView = UIImageView()
+
         
         titleLabel?.lineBreakMode = NSLineBreakMode.byTruncatingMiddle
         titleLabel?.backgroundColor = UIColor.clear;
@@ -418,5 +417,14 @@ class LLButton : UIControl {
         rect.origin.y += CGFloat(floorf(Float(contentRect.size.height - rect.size.height)/2.0))
         
         return rect
+    }
+    
+    //设置约束的时候会 调用
+    override var intrinsicContentSize: CGSize {
+        let labelWidth: CGFloat = titleSize().width
+        let labelHeight: CGFloat = titleSize().height
+        let imgWidth: CGFloat = imageSize().width
+        let imgHeight: CGFloat = imageSize().height
+        return CGSize(width: (labelWidth + imgWidth), height: max(imgHeight, labelHeight))
     }
 }
